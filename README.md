@@ -1,83 +1,104 @@
-# 🏠 House Price Prediction
+# 🏠 House Price Prediction Project
 
-This project focuses on building a predictive model to estimate house prices using machine learning algorithms. It leverages **Linear Regression** and **Random Forest Regressor**, and applies **GridSearchCV** for hyperparameter tuning to optimize model performance.
-
----
-
-## 📌 Project Overview
-
-Predicting housing prices is a classic regression problem and is useful for real estate insights, investment analysis, and economic forecasting. This project demonstrates how machine learning models can be trained and evaluated on structured tabular data to predict housing prices.
+This project focuses on predicting house prices using two popular machine learning algorithms — **Linear Regression** and **Random Forest Regressor**. The goal is to build an efficient and interpretable regression model using feature engineering, data preprocessing, and hyperparameter tuning techniques.
 
 ---
 
-## 📂 Dataset
+## 📌 Project Flow
 
-- The dataset contains features such as:
-  - Total rooms
-  - Total bedrooms
-  - Population
-  - Households
-  - Median income
-  - Location (ocean proximity)
-  - And more...
+1. **Data Loading**  
+   Loaded the California housing dataset and checked for basic structure.
 
-- Target variable: `median_house_value` (continuous)
+2. **Missing Value Treatment**  
+   - Checked for null values  
+   - Dropped missing entries for simplicity
 
----
+3. **Exploratory Data Analysis (EDA)**  
+   - Explored features through summary statistics  
+   - Visualized distributions and relationships using plots
 
-## ⚙️ Algorithms Used
+4. **Log Transformation**  
+   - Applied log transformation on skewed features (like target)  
+   - Resulted in a more **Gaussian bell-shaped distribution** suitable for regression models
 
-### 1. **Linear Regression**
-- Simple and interpretable baseline model.
-- Achieved an R² score of **66%** on the test set.
+5. **Encoding Categorical Features**  
+   - Used **One-Hot Encoding** for `ocean_proximity` categorical column
 
-### 2. **Random Forest Regressor**
-- Ensemble learning method that handles non-linear relationships.
-- Hyperparameters tuned using **GridSearchCV**.
-- Achieved an R² score of **81%** on the test set.
+6. **Feature Engineering**  
+   - Created new meaningful features such as:  
+     `rooms_per_household = total_rooms / households`  
+     `bedrooms_per_room = total_bedrooms / total_rooms`  
+     `population_per_household = population / households`
 
----
+7. **Train-Test Split**  
+   - Split the dataset into training and testing sets
 
-## 🔍 GridSearchCV
-Used to tune key parameters of the Random Forest model:
-- `n_estimators`
-- `max_depth`
-- `min_samples_split`
+8. **Model Development**
 
-This helped improve performance significantly over default parameters.
+   - ### 🔹 Linear Regression
+     - No significant difference with or without StandardScaler  
+     - **R² Score**: 0.6829  
+     - **MAE**: 46,835.53  
+     - **MSE**: 4.14 × 10⁹  
+     - **RMSE**: 64,400.72  
+     - **Accuracy (approx)**: 68.2%
 
----
+   - ### 🔹 Random Forest Regressor
+     - **R² Score**: 0.8066  
+     - **MAE**: 32,844.84  
+     - **MSE**: 2.52 × 10⁹  
+     - **RMSE**: 50,292.89  
+     - **Accuracy (approx)**: 80.66%
 
-## 📈 Results Summary
-
-| Model              | R² Score (Test Set) |
-|-------------------|---------------------|
-| Linear Regression | 66%                 |
-| Random Forest     | 81%                 |
-
----
-
-## 📚 Key Learnings
-
-- Gained a strong understanding of the **basics of Linear Regression and Random Forest** algorithms.
-- Learned how to apply **log transformation** to normalize skewed data and improve model performance.
-- Developed skills in **hyperparameter tuning** using GridSearchCV.
-- Enhanced knowledge of **model evaluation metrics** and **data preprocessing**.
-
----
-
-## 🛠️ Libraries Used
-- `pandas`
-- `numpy`
-- `scikit-learn`
-- `matplotlib`
-- `seaborn`
+   - ### 🔹 After Hyperparameter Tuning (GridSearchCV)
+     - Best parameters found:  
+       `{'max_depth': None, 'min_samples_split': 2, 'n_estimators': 150}`
+     - **R² Score**: 0.8089  
+     - **MAE**: 32,711.51  
+     - **MSE**: 2.49 × 10⁹  
+     - **RMSE**: 49,995.83  
+     - **Accuracy (approx)**: 80.88%
 
 ---
 
-## 🚀 How to Run
+## 📈 Evaluation Metrics (Used)
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/JaydevGupta22/house-price-prediction.git
-   cd house-price-prediction
+- **R² Score**: Measures how well the predictions approximate actual values (closer to 1 is better).
+- **MAE (Mean Absolute Error)**: Average absolute difference between actual and predicted prices.
+- **MSE (Mean Squared Error)**: Penalizes larger errors more than MAE.
+- **RMSE (Root Mean Squared Error)**: Interpretable error metric in the same units as price.
+
+---
+
+## 💡 Key Learnings
+
+- Gained hands-on understanding of both **Linear Regression** and **Random Forest** algorithms.
+- Learned the impact of **log transformation** to make the data normally distributed for better model performance.
+- Understood the importance of **feature engineering** and **hyperparameter tuning** in improving model accuracy.
+
+---
+
+## 🚀 Future Improvements
+
+- Try **XGBoost** and **Gradient Boosting Regressors**
+- Deploy model using Flask or Streamlit
+- Automate preprocessing and model pipeline
+
+---
+
+## 📂 Directory Structure
+
+
+
+
+---
+
+## 🧠 Author
+
+- **Jaydev Gupta**  
+  3rd-year B.Tech Student – AI & Data Science  
+  Passionate about ML, DL, and Data Analytics
+
+---
+
+
